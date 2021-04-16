@@ -4,7 +4,7 @@ const getLoding = state => state.contacts.loading;
 const getError = state => state.contacts.error;
 
 const getFilter = state => state.contacts.filter;
-const getContacts = state => state.contacts.contacts;
+const getContacts = state => state.contacts.items;
 
 /*const getVisibleContacts = state => {
   const contacts = getContacts(state);
@@ -24,12 +24,13 @@ const getNormolizedFilter = state => {
 const getVisibleContacts = createSelector(
   [getContacts, getNormolizedFilter],
   (contacts, normolizedFilter) => {
-    contacts.filter(({ name }) =>
-      name.toLowerCase().includes(normolizedFilter),
+    contacts.filter(contacts =>
+      contacts.name.toLowerCase().includes(normolizedFilter),
     );
   },
 );
 const contactsSelectors = {
+  getContacts,
   getFilter,
   getLoding,
   getError,

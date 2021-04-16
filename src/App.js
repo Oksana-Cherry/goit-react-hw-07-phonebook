@@ -6,8 +6,7 @@ import ContactList from './components/ContactList/';
 import Filter from './components/Filter';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import contactsOperations from './redux/contacts/contect-operations';
-import contactsSelectors from './redux/contacts/contacts-selectors';
+import { contactsOperations, contactsSelectors } from './redux/contacts';
 
 class App extends Component {
   componentDidMount() {
