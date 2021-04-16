@@ -1,23 +1,57 @@
-//import { Component } from 'react';
+import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList/';
 import Filter from './components/Filter';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import contactsOperations from './redux/contacts/contect-operations';
+import contactsSelectors from './redux/contacts/contacts-selectors';
 
-const App = () => (
-  <>
-    <h1>Phonebook</h1>
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchContact();
+  }
 
-    <ContactForm />
+  render() {
+    return (
+      <>
+        <h1>Phonebook</h1>
 
-    <h2>Contacts</h2>
+        <ContactForm />
 
-    <Filter />
+        <h2>Contacts</h2>
 
-    <ContactList />
-  </>
-);
+        <Filter />
 
-export default App;
+        <ContactList />
+        {this.props.isLoading && (
+          <Loader
+            type="ThreeDots"
+            color="#303f9f"
+            height={80}
+            width={80}
+            className="Loader"
+          />
+        )}
+        {this.props.error && <h1>No result found!</h1>}
+      </>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  //isLoading: state.contacts.loading,
+  isLoading: contactsSelectors.getLoding(state),
+  error: contactsSelectors.getError(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchContact: () => dispatch(contactsOperations.fetchContact()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 /*class App extends Component {
   state = {

@@ -1,27 +1,8 @@
-/*import { createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const reducer = (state = {}, action) => state;
-
-const store = createStore(reducer, composeWithDevTools());
-export default store;*/
-/*import { combineReducers } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
-
-const rootReducer = combineReducers({
-  contacts,
-});
-
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: process.env.NODE_ENV === 'development',
-});
-export default store;*/
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import {
-  persistStore,
-  persistReducer,
+  //persistStore,
+  //persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -29,28 +10,42 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+//import storage from 'redux-persist/lib/storage';
 import contactReducer from './contacts/contact-reducer';
 
-const contactsPersistConfig = {
+/*const contactsPersistConfig = {
   key: 'contacts',
   storage,
   blacklist: ['filter'],
-};
+};*/
 
-const middleware = getDefaultMiddleware =>
+/*const myMiddleware = store => next => action => {
+  console.log('моя прослойка', action);
+
+  next(action);
+};*/
+
+/*const middleware = getDefaultMiddleware =>
   getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }).concat(logger);
-
+  }).concat(logger);*/
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  logger,
+];
 export const store = configureStore({
   reducer: {
-    contacts: persistReducer(contactsPersistConfig, contactReducer),
+    contacts: contactReducer, //persistReducer(contactsPersistConfig, contactReducer),
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware,
 });
 
-export const persistor = persistStore(store);
+//export const persistor = persistStore(store);
+export default store;
