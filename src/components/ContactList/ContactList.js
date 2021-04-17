@@ -16,7 +16,6 @@ const ContactListItem = ({ id, name, number, onDelete }) => {
 
 const ContactList = ({ contacts, onDelete }) => {
   if (contacts.length === 0) return null;
-
   return (
     <ul className={styles.List}>
       {contacts.map(contact => (

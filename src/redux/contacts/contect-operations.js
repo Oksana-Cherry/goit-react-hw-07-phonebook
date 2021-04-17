@@ -11,6 +11,7 @@ import {
   fetchContactSuccess,
   fetchContactError,
 } from './contact-actions';
+
 axios.defaults.baseURL = 'http://localhost:4040';
 
 /*const asyncActionCreator = args => dispatch => {
@@ -57,8 +58,12 @@ const deleteContact = id => dispatch => {
   dispatch(deleteContactRequrest());
 
   axios
+    /*.delete(`/contacts/${id}`)
+    .then(() => dispatch(deleteContactSuccess(id)))*/
     .delete(`/contacts/${id}`)
-    .then(() => dispatch(deleteContactSuccess(id)))
+    .then(() => {
+      dispatch(deleteContactSuccess(id));
+    })
     .catch(error => dispatch(deleteContactError(error)));
 };
 

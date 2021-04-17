@@ -36,39 +36,6 @@ class ContactForm extends Component {
     }
     this.setState({ name: '', number: '' });
   };
-  //handleSubmit = e => {
-  //  e.preventDefault();
-
-  // const { name, number } = this.state;
-  //const { onAdd } = this.props;
-
-  //const isValidatedForm = this.validateForm();
-
-  //if (!isValidatedForm) return;
-  //onAdd({ id: uuid(), name, number });
-  //this.resetForm();
-  //};
-  // handleCheckUnique = name => {
-  // проверка
-  // const { contacts } = this.state;
-  //console.log(contacts);
-  // const isExistContact = !!contacts.find(contact => contact.name === name);
-
-  //  isExistContact && alert(`${name}is already in the Phonebook`);
-  //  return !isExistContact;
-  //};
-
-  /*validateForm = () => {
-    const { name, number } = this.state;
-    const { onCheckUnique } = this.props;
-    if (!name || !number) {
-      alert(`Some field is empty`);
-
-      return false;
-    }
-    return onCheckUnique(name);
-  };*/
-
   resetForm = () => this.setState(this.state);
 
   render() {
