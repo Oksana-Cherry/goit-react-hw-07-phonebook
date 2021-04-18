@@ -34,13 +34,10 @@ const getVisibleContacts = createSelector(
 const getVisibleContacts = createSelector(
   [getContacts, getFilter],
   (contacts, filter) => {
-    const getFiterContacts = contacts => {
-      const normalizedFilter = filter.toLowerCase();
-      return contacts.filter(contact =>
-        contact.name.toLowerCase().includes(normalizedFilter),
-      );
-    };
-    return getFiterContacts(contacts);
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter),
+    );
   },
 );
 const contactsSelectors = {
