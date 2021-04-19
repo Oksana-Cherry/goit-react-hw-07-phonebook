@@ -3,6 +3,7 @@ import styles from './ContactList.module.css';
 //import contactsOperations from '../../redux/contacts/contect-operations';
 //import contactsSelectors from '../../redux/contacts/contacts-selectors';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
+
 const ContactListItem = ({ id, name, number, onDelete }) => {
   return (
     <li className={styles.List_item} key={id}>
@@ -14,7 +15,8 @@ const ContactListItem = ({ id, name, number, onDelete }) => {
   );
 };
 
-const ContactList = (contacts, onDelete) => {
+const ContactList = ({ contacts, onDelete }) => {
+  console.log(' contacts', contacts);
   if (contacts.length === 0) return null;
   return (
     <ul className={styles.List}>
@@ -24,9 +26,17 @@ const ContactList = (contacts, onDelete) => {
     </ul>
   );
 };
-
+/*const getVisibleContacts = (contacts, filter) => {
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase()),
+  );
+};
+/*const mapStateToProps = ({ contacts: { contacts, filter } }) => ({
+  contacts: getVisibleContacts(contacts, filter),
+});
+*/
 const mapStateToProps = state => ({
-  contacts: contactsSelectors.getVisibleContacts(state),
+  contacts: contactsSelectors.getVisibleContact(state),
 });
 
 const mapDispatchToProps = dispatch => ({

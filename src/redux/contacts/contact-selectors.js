@@ -1,8 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const getFilter = state => state.contacts.filter;
 const getContacts = state => state.contacts.items;
-
+const getFilter = state => state.contacts.filter;
 const getLoding = state => state.contacts.loading;
 const getError = state => state.contacts.error;
 
@@ -31,9 +30,10 @@ const getVisibleContacts = createSelector(
   },
 );*/
 
-const getVisibleContacts = createSelector(
+const getVisibleContact = createSelector(
   [getContacts, getFilter],
   (contacts, filter) => {
+    console.log('новый массив видимых контактов');
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter),
@@ -45,6 +45,6 @@ const contactsSelectors = {
   getFilter,
   getLoding,
   getError,
-  getVisibleContacts,
+  getVisibleContact,
 };
 export default contactsSelectors;

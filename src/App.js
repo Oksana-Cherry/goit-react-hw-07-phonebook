@@ -6,7 +6,7 @@ import ContactList from './components/ContactList/';
 import Filter from './components/Filter';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import { contactsOperations, contactsSelectors } from './redux/contacts';
+import { contactsSelectors, contactsOperations } from './redux/contacts';
 
 class App extends Component {
   componentDidMount() {
@@ -41,7 +41,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  //isLoading: state.contacts.loading,
   isLoading: contactsSelectors.getLoding(state),
   error: contactsSelectors.getError(state),
 });

@@ -30,13 +30,19 @@ export const deleteContactError = createAction('contacts/deleteContactError');
 
 export const changeFilterName = createAction('contacts/filter');
 
-/*const contactActions = {
-  // addContact,
+/*
+const contactActions = {
+  fetchContactRequrest,
+  fetchContactSuccess,
+  fetchContactError,
   addContactRequrest,
   addContactSuccess,
   addContactError,
-  deleteContact,
+  deleteContactRequrest,
+  deleteContactSuccess,
+  deleteContactError,
   changeFilterName,
 };
+
 
 export default contactActions;*/
